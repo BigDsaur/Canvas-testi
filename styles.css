@@ -18,3 +18,7 @@ body {
     background-color: bisque;
     border-radius: 4px;
 }
+
+#source {
+    display: none;
+}
