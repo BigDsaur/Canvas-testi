@@ -93,91 +93,54 @@ const ctx = canvas.getContext('2d')
 
 // animation 1
 
-// const circle = {
-//     x: 30,
-//     y: 30,
-//     size: 30,
-//     dx: 10,
-//     dy: 10
-// }
 
-// const circle2 = {
-//     x: 570,
-//     y: 570,
-//     size: 30,
-//     dx: 10,
-//     dy: 10
-// }
-
-// function drawCircle() {
-//     ctx.beginPath();
-//     ctx.arc(circle.x, circle.y, circle.size, 0, Math.PI * 2);
-//     ctx.fillStyle = 'purple';
-//     ctx.fill();
-// }
-
-// function drawCircle2() {
-//     ctx.beginPath();
-//     ctx.arc(circle2.x, circle2.y, circle2.size, 0, Math.PI * 2);
-//     ctx.fillStyle = 'teal';
-//     ctx.fill();
-// }
-
-// function update() {
-//     ctx.clearRect(0,0, canvas.width, canvas.height)
-
-//     drawCircle()
-//     drawCircle2()
-//     // change position
-//     circle.x += circle.dx
-//     circle.y += circle.dy
-//     circle2.x += circle2.dx
-//     circle2.y += circle2.dy
-
-//     // seinät
-//     if(circle.x + circle.size > canvas.width || circle.x - circle.size < 0)  {
-//         circle.dx *= -1; // circle.dx = circle.dx * -1
-//     }
-
-//     if(circle.y + circle.size > canvas.height || circle.y - circle.size < 0)  {
-//         circle.dy *= -1; // circle.dx = circle.dx * -1
-//     }
-
-//     if(circle2.x + circle2.size > canvas.width || circle2.x - circle2.size < 0)  {
-//         circle2.dx *= -1; // circle.dx = circle.dx * -1
-//     }
-
-//     if(circle2.y + circle2.size > canvas.height || circle2.y - circle2.size < 0)  {
-//         circle2.dy *= -1; // circle.dx = circle.dx * -1
-//     }
-
-//     // pallojen kolinat
-
-//     if(circle.x === circle2.x && circle.y === circle2.y)  {
-//         console.log('collision')
-//         circle.dx *= -1;
-//         circle2.dx *= -1;
-//     }
-
-
-//     requestAnimationFrame(update)
-// }
 
 // update ()
 
-// animation 2
+// animation 1 ja 2 samassa
 
 const image = document.getElementById('source')
+
+const circle = {
+    x: 30,
+    y: 30,
+    size: 30,
+    dx: 10,
+    dy: 10
+}
+
+const circle2 = {
+    x: 570,
+    y: 570,
+    size: 30,
+    dx: 10,
+    dy: 10
+}
 
 const player = {
     w: 50,
     h: 70,
-    x: 20,
-    y: 200,
+    x: 30,
+    y: 270,
     speed: 15,
     dx: 0,
     dy: 0, 
 };
+
+function drawCircle() {
+    ctx.beginPath();
+    ctx.arc(circle.x, circle.y, circle.size, 0, Math.PI * 2);
+    ctx.fillStyle = 'purple';
+    ctx.fill();
+}
+
+function drawCircle2() {
+    ctx.beginPath();
+    ctx.arc(circle2.x, circle2.y, circle2.size, 0, Math.PI * 2);
+    ctx.fillStyle = 'teal';
+    ctx.fill();
+}
+
 
 function drawPlayer() {
     ctx.drawImage(image, player.x, player.y, player.w,
@@ -218,10 +181,40 @@ function detectWalls() {
 
 function update() {
     clear()
-
     drawPlayer()
-
     newpos()
+
+    drawCircle()
+    drawCircle2()
+    // change position
+    circle.x += circle.dx
+    circle.y += circle.dy
+    circle2.x += circle2.dx
+    circle2.y += circle2.dy
+
+    if(circle.x + circle.size > canvas.width || circle.x - circle.size < 0)  {
+        circle.dx *= -1; // circle.dx = circle.dx * -1
+    }
+
+    if(circle.y + circle.size > canvas.height || circle.y - circle.size < 0)  {
+        circle.dy *= -1; // circle.dx = circle.dx * -1
+    }
+
+    if(circle2.x + circle2.size > canvas.width || circle2.x - circle2.size < 0)  {
+        circle2.dx *= -1; // circle.dx = circle.dx * -1
+    }
+
+    if(circle2.y + circle2.size > canvas.height || circle2.y - circle2.size < 0)  {
+        circle2.dy *= -1; // circle.dx = circle.dx * -1
+    }
+
+    // pallojen kolinat
+
+    if(circle.x === circle2.x && circle.y === circle2.y)  {
+        console.log('collision')
+        circle.dx *= -1;
+        circle2.dx *= -1;
+    }
 
     requestAnimationFrame(update)
 }
